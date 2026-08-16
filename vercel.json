@@ -1,0 +1,4 @@
+{
+  "buildCommand": "ng build --configuration production",
+  "installCommand": "npm install --legacy-peer-deps"
+}
