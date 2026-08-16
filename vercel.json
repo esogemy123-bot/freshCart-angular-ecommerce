@@ -1,4 +1,4 @@
 {
-  "buildCommand": "ng build --configuration production",
-  "installCommand": "npm install --legacy-peer-deps"
+  "installCommand": "npm install --legacy-peer-deps",
+  "outputDirectory": "dist/e-commerce/browser"
 }
