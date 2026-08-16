@@ -1,0 +1,129 @@
+<section class="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- البانر الأول: الفواكه العضوية (يأتي من الشمال) -->
+    <div
+      [class.opacity-0]="!isInit()"
+      [class.-translate-x-full]="!isInit()"
+      [class.opacity-100]="isInit()"
+      [class.translate-x-0]="isInit()"
+      class="relative transition-all duration-700 ease-out overflow-hidden rounded-3xl p-8 sm:p-10 bg-linear-to-br from-emerald-600 via-emerald-700 to-emerald-900 text-white shadow-xl shadow-emerald-900/10"
+    >
+      <!-- دوائر زينة في الخلفية للتصميم -->
+      <div
+        class="absolute -top-12 -right-12 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none"
+      ></div>
+      <div
+        class="absolute -bottom-16 -left-16 w-56 h-56 bg-emerald-900/40 rounded-full blur-3xl pointer-events-none"
+      ></div>
+
+      <!-- محتوى البانر -->
+      <div class="relative z-10">
+        <div
+          class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md text-xs font-semibold tracking-wide text-white mb-5 border border-white/10"
+        >
+          <span>🔥</span> Deal of the Day
+        </div>
+
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2">
+          Fresh Organic Fruits
+        </h2>
+        <p class="text-emerald-100/90 text-sm sm:text-base font-normal mb-6 max-w-md">
+          Get up to 40% off on selected organic fruits
+        </p>
+
+        <div class="flex flex-wrap items-baseline gap-3 mb-8">
+          <span class="text-3xl sm:text-4xl font-black tracking-tight text-white drop-shadow-sm"
+            >40% OFF</span
+          >
+          <span
+            class="text-xs sm:text-sm font-medium text-emerald-100 bg-white/15 px-3 py-1.5 rounded-xl backdrop-blur-sm border border-white/10"
+          >
+            Use code: <span class="font-bold text-white">ORGANIC40</span>
+          </span>
+        </div>
+
+        <a
+          routerLink="/shop"
+          class="inline-flex items-center gap-2 bg-white text-emerald-900 hover:bg-emerald-50 font-bold px-6 py-3.5 rounded-full text-sm shadow-lg shadow-emerald-950/20 transition-all group cursor-pointer"
+        >
+          <span>Shop Now</span>
+          <svg
+            class="w-4 h-4 transition-all duration-700 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"
+            ></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- البانر الثاني: الخضروات الخارجية (يأتي من اليمين) -->
+    <div
+      [class.opacity-0]="!isInit()"
+      [class.translate-x-full]="!isInit()"
+      [class.opacity-100]="isInit()"
+      [class.translate-x-0]="isInit()"
+      class="relative transition-all duration-700 ease-out overflow-hidden rounded-3xl p-8 sm:p-10 bg-linear-to-br from-amber-500 via-orange-600 to-red-600 text-white shadow-xl shadow-orange-950/10"
+    >
+      <!-- دوائر زينة في الخلفية للتصميم -->
+      <div
+        class="absolute -top-12 -right-12 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none"
+      ></div>
+      <div
+        class="absolute -bottom-16 -left-16 w-56 h-56 bg-red-950/30 rounded-full blur-3xl pointer-events-none"
+      ></div>
+
+      <!-- محتوى البانر -->
+      <div class="relative z-10">
+        <div
+          class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md text-xs font-semibold tracking-wide text-white mb-5 border border-white/10"
+        >
+          <span>✨</span> New Arrivals
+        </div>
+
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2">Exotic Vegetables</h2>
+        <p class="text-orange-100/90 text-sm sm:text-base font-normal mb-6 max-w-md">
+          Discover our latest collection of premium vegetables
+        </p>
+
+        <div class="flex flex-wrap items-baseline gap-3 mb-8">
+          <span class="text-3xl sm:text-4xl font-black tracking-tight text-white drop-shadow-sm"
+            >25% OFF</span
+          >
+          <span
+            class="text-xs sm:text-sm font-medium text-orange-100 bg-white/15 px-3 py-1.5 rounded-xl backdrop-blur-sm border border-white/10"
+          >
+            Use code: <span class="font-bold text-white">FRESH25</span>
+          </span>
+        </div>
+
+        <a
+          routerLink="/shop"
+          class="inline-flex items-center gap-2 bg-white text-orange-700 hover:bg-orange-50 font-bold px-6 py-3.5 rounded-full text-sm shadow-lg shadow-orange-950/20 transition-all group cursor-pointer"
+        >
+          <span>Explore Now</span>
+          <svg
+            class="w-4 h-4 transition-all duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"
+            ></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

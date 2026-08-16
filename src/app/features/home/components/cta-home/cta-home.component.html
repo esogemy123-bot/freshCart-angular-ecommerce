@@ -1,0 +1,173 @@
+<section class="py-12 px-4 sm:px-6 lg:px-8 bg-white">
+  <div
+    class="bg-linear-to-br from-emerald-50/50 via-white to-emerald-50/30 max-w-7xl mx-auto border border-emerald-100/80 shadow-xl shadow-emerald-900/5 rounded-3xl p-6 sm:p-10 lg:p-12"
+  >
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <!-- القسم الأيسر: النشرة البريدية (Newsletter) -->
+      <div class="lg:col-span-7 space-y-6">
+        <!-- الأيقونة والعنوان الصغير -->
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20"
+          >
+            <!-- أيقونة البريد (SVG) -->
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <span class="text-xs font-bold tracking-wider text-emerald-600 uppercase block"
+              >NEWSLETTER</span
+            >
+            <span class="text-xs text-gray-400 font-medium">50,000+ subscribers</span>
+          </div>
+        </div>
+
+        <!-- العناوين الرئيسية -->
+        <div class="space-y-2">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+            Get the Freshest Updates
+          </h2>
+          <h3 class="text-3xl sm:text-4xl font-extrabold text-emerald-600 tracking-tight">
+            Delivered Free
+          </h3>
+          <p class="text-gray-500 text-base pt-1">
+            Weekly recipes, seasonal offers & exclusive member perks.
+          </p>
+        </div>
+
+        <!-- مميزات صغيرة (Badges) -->
+        <div class="flex flex-wrap gap-3 pt-1">
+          <div
+            class="flex items-center gap-2 px-3.5 py-2 rounded-full border border-gray-100 bg-gray-50/50 text-xs font-medium text-gray-700 shadow-sm"
+          >
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            Fresh Picks Weekly
+          </div>
+          <div
+            class="flex items-center gap-2 px-3.5 py-2 rounded-full border border-gray-100 bg-gray-50/50 text-xs font-medium text-gray-700 shadow-sm"
+          >
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            Free Delivery Codes
+          </div>
+          <div
+            class="flex items-center gap-2 px-3.5 py-2 rounded-full border border-gray-100 bg-gray-50/50 text-xs font-medium text-gray-700 shadow-sm"
+          >
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            Members-Only Deals
+          </div>
+        </div>
+
+        <!-- فورم الإشتراك -->
+        <form class="space-y-3 pt-2" (submit)="$event.preventDefault()">
+          <div class="flex flex-col sm:flex-row gap-3">
+            <input
+              type="email"
+              placeholder="you@example.com"
+              class="flex-1 bg-white border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-emerald-500 focus:border-emerald-500 block w-full p-3.5 shadow-sm outline-none transition-all"
+              required
+            />
+            <button
+              type="submit"
+              class="text-white bg-emerald-600 hover:bg-emerald-700 hover:scale-105 font-medium rounded-xl text-sm px-6 py-3.5 text-center flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 transition-all cursor-pointer"
+            >
+              <span>Subscribe</span>
+              <svg
+                class="w-4 h-4 rtl:rotate-180"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <p class="text-xs text-gray-400 flex items-center gap-1.5">
+            <span>✨</span> Unsubscribe anytime. No spam, ever.
+          </p>
+        </form>
+      </div>
+
+      <!-- القسم الأيمن: تطبيق الهاتف (Mobile App Card) -->
+      <div class="lg:col-span-5">
+        <div
+          class="bg-gray-950 text-white rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden border border-gray-800"
+        >
+          <!-- شارة التطبيق -->
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 text-xs font-semibold mb-6"
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            MOBILE APP
+          </div>
+
+          <!-- عنوان الكارد الداكن -->
+          <h3 class="text-2xl sm:text-3xl font-bold tracking-tight mb-2">Shop Faster on Our App</h3>
+          <p class="text-gray-400 text-xs sm:text-sm mb-6">
+            Get app-exclusive deals & 15% off your first order.
+          </p>
+
+          <!-- أزرار المتاجر -->
+          <div class="space-y-3 mb-6">
+            <!-- App Store -->
+            <a
+              href="#"
+              class="flex items-center gap-3 bg-gray-900 hover:bg-gray-850 hover:scale-105 border border-gray-800 rounded-2xl p-3.5 transition-all group"
+            >
+              <svg class="w-7 h-7 text-white shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.35c.62-.75 1.04-1.79.93-2.83-.9.04-1.99.6-2.63 1.35-.58.68-1.09 1.77-.95 2.82 1.01.08 2.03-.51 2.65-1.34z"
+                />
+              </svg>
+              <div>
+                <span class="text-[10px] text-gray-400 block uppercase tracking-wider"
+                  >Download on</span
+                >
+                <span class="text-sm font-semibold tracking-wide text-gray-100">App Store</span>
+              </div>
+            </a>
+
+            <!-- Google Play -->
+            <a
+              href="#"
+              class="flex items-center gap-3 bg-gray-900 hover:bg-gray-850 hover:scale-105 border border-gray-800 rounded-2xl p-3.5 transition-all group"
+            >
+              <svg class="w-7 h-7 text-white shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M3.609 1.814L13.792 12 3.61 22.186a1.285 1.285 0 0 1-.36-.915V2.729c0-.362.13-.701.359-.915zM15.207 13.415l1.91 1.91-11.455 6.621 9.545-8.531zm0-2.83l-9.545-8.531 11.455 6.621-1.91 1.91zm1.91 1.91l3.528 2.039c.639.369.639 1.294 0 1.663l-3.528 2.039-2.121-2.121 2.121-2.121z"
+                />
+              </svg>
+              <div>
+                <span class="text-[10px] text-gray-400 block uppercase tracking-wider"
+                  >Get it on</span
+                >
+                <span class="text-sm font-semibold tracking-wide text-gray-100">Google Play</span>
+              </div>
+            </a>
+          </div>
+
+          <!-- التقييم -->
+          <div class="flex items-center gap-2 pt-2 border-t border-gray-900">
+            <div class="flex text-amber-400 text-xs">★★★★★</div>
+            <span class="text-xs text-gray-300 font-medium">4.9 · 100K+ downloads</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

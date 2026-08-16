@@ -1,0 +1,43 @@
+section .item {
+  background-image: linear-gradient(to right, #00c758e6, #05df7280), url(/assets/image.png);
+  background-size: cover;
+  background-position: center;
+}
+
+swiper-container:part(button-prev),
+swiper-container:part(button-next) {
+  background-color: #fff;
+  width: 14px;
+  height: 14px;
+  padding: 14px;
+  border-radius: 50%;
+  color: var(--color-primary);
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.377);
+}
+
+swiper-container:part(bullet-active) {
+  background-color: #fff;
+  width: 25px;
+  height: 14px;
+  transition: all 1s;
+  border-radius: 15%;
+  color: var(--color-primary);
+  -webkit-border-radius: 15%;
+  -moz-border-radius: 15%;
+  -ms-border-radius: 15%;
+  -o-border-radius: 15%;
+  box-shadow: 0 0 10 rgba(0, 0, 0, 0.377);
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  -ms-transition: all 1s;
+  -o-transition: all 1s;
+}
+swiper-container:part(bullet) {
+  background-color: #fff;
+  width: 16px;
+  height: 16px;
+}

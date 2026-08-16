@@ -1,0 +1,54 @@
+<section class="py-10">
+  <div class="container px-4">
+    <div class="mx-auto max-w-7xl">
+      <div class="mb-8 flex justify-between items-center">
+        <app-h2 firstWord="Shop By" highlightedWord="Category"></app-h2>
+        <a
+          class="text-primary gap-2 self-end sm:self-auto hover:text-[#0c6a2f] font-medium flex items-center cursor-pointer transition-all duration-200 md:text-xl"
+          routerLink="categories"
+          >View All Categories
+          <i class="fa-solid fa-arrow-right font-bold"></i>
+        </a>
+      </div>
+      <div
+        class="sm:gap-2 xl:gap-4 gap-1 md:gap-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 l:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-6 mt-3"
+      >
+        @for (category of allCategories(); track category._id) {
+          <div
+            class="group relative bg-white rounded-2xl border border-gray-100 px-6 py-4 shadow-xs hover:shadow-xl hover:border-emerald-500/30 transition-all duration-300 cursor-pointer overflow-hidden max-w-xs text-center"
+          >
+            <!-- Subtle Background Glow Effect on Hover -->
+            <div
+              class="absolute inset-0 bg-linear-to-b from-emerald-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+            ></div>
+
+            <!-- Image Container -->
+            <div
+              class="relative w-20 rounded-[50%] mx-auto h-20 flex items-center justify-center mb-4 overflow-hidden"
+            >
+              <img
+                [src]="category.image"
+                [alt]="category.name"
+                class="w-full rounded-[50%] object-contain transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1"
+              />
+            </div>
+
+            <!-- Category Title -->
+            <h3
+              class="relative text-lg font-bold text-gray-800 group-hover:text-emerald-600 transition-colors duration-200"
+            >
+              {{ category.name }}
+            </h3>
+
+            <!-- Optional Subtitle/Indicator (Appears smoothly on hover) -->
+            <span
+              class="text-xs text-emerald-600 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-1 block"
+            >
+              Explore Products &rarr;
+            </span>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

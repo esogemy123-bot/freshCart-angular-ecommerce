@@ -1,0 +1,141 @@
+<div class="bg-gray-50 min-h-screen">
+  <div
+    class="bg-linear-to-r from-[#18A94E] via-[#20C15C] to-[#3FD675] py-12 px-4 sm:px-6 lg:px-8 shadow-inner"
+  >
+    <div class="max-w-7xl mx-auto">
+      <!-- Breadcrumb -->
+      <nav class="text-xs sm:text-sm text-purple-100 mb-6 flex items-center gap-2">
+        <a routerLink="/" class="hover:text-white transition-colors">Home</a>
+        <span>/</span>
+        <a routerLink="/categories" class="hover:text-white transition-colors">Categories</a>
+        <span>/</span>
+        <span
+          /* [routerLink]="['/subcategories', categoryId]" */
+          class="text-white cursor-default font-medium"
+          >{{ subcategory().name }}</span
+        >
+      </nav>
+
+      <!-- Header Content with Icon -->
+      <div class="flex items-center gap-4">
+        <!-- Icon Box -->
+        <div
+          class="w-14 h-14 p-3 bg-emerald-100 rounded-xl bg-primary-50 flex items-center justify-center mb-4 group-hover:bg-primary-100 transition-colors"
+        >
+          <svg
+            data-prefix="fas"
+            data-icon="folder-open"
+            class="svg-inline--fa fa-folder-open text-sxl text-primary"
+            role="img"
+            viewBox="0 0 576 512"
+            aria-hidden="true"
+          >
+            <path
+              fill="currentColor"
+              d="M56 225.6L32.4 296.2 32.4 96c0-35.3 28.7-64 64-64l138.7 0c13.8 0 27.3 4.5 38.4 12.8l38.4 28.8c5.5 4.2 12.3 6.4 19.2 6.4l117.3 0c35.3 0 64 28.7 64 64l0 16-365.4 0c-41.3 0-78 26.4-91.1 65.6zM477.8 448L99 448c-32.8 0-55.9-32.1-45.5-63.2l48-144C108 221.2 126.4 208 147 208l378.8 0c32.8 0 55.9 32.1 45.5 63.2l-48 144c-6.5 19.6-24.9 32.8-45.5 32.8z"
+            ></path>
+          </svg>
+        </div>
+
+        <!-- Title & Subtitle -->
+        <div>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-wide">
+            {{ subcategory().name }}
+          </h1>
+          <p class="text-xs sm:text-[16px] text-purple-100 mt-1 font-medium">
+            Shop {{ subcategory().name }} Products
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto py-12 px-8">
+    <!-- Brands Grid -->
+    <!-- Section Title -->
+    <h2 class="text-lg sm:text-2xl font-semibold text-gray-600 mb-6">
+      0 Products in {{ subcategory().name }}
+    </h2>
+
+    @if (subcategories().length > 0) {
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Subcategories Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <!-- Card Item (ممكن تتكرر بـ @for أو ngFor) -->
+          @for (subcategory of subcategories(); track subcategory._id) {
+            <div
+              [routerLink]="['/speciSubcategories', subcategory._id]"
+              class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group flex flex-col justify-between"
+            >
+              <!-- Icon Box -->
+              <div
+                class="w-14 h-14 p-3 bg-emerald-100 rounded-xl bg-primary-50 flex items-center justify-center mb-4 group-hover:bg-primary-100 transition-colors"
+              >
+                <svg
+                  data-prefix="fas"
+                  data-icon="folder-open"
+                  class="svg-inline--fa fa-folder-open text-sxl text-primary"
+                  role="img"
+                  viewBox="0 0 576 512"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M56 225.6L32.4 296.2 32.4 96c0-35.3 28.7-64 64-64l138.7 0c13.8 0 27.3 4.5 38.4 12.8l38.4 28.8c5.5 4.2 12.3 6.4 19.2 6.4l117.3 0c35.3 0 64 28.7 64 64l0 16-365.4 0c-41.3 0-78 26.4-91.1 65.6zM477.8 448L99 448c-32.8 0-55.9-32.1-45.5-63.2l48-144C108 221.2 126.4 208 147 208l378.8 0c32.8 0 55.9 32.1 45.5 63.2l-48 144c-6.5 19.6-24.9 32.8-45.5 32.8z"
+                  ></path>
+                </svg>
+              </div>
+
+              <!-- Category Name -->
+              <h3
+                class="text-base sm:text-lg font-bold text-gray-800 tracking-tight group-hover:text-emerald-600 transition-colors duration-200"
+              >
+                {{ subcategory.name }}
+              </h3>
+            </div>
+          }
+        </div>
+      </div>
+    } @else {
+      <!-- Empty State Container -->
+      <div class="py-12 flex flex-col items-center justify-center text-center w-full">
+        <!-- Icon Box with Pulse/Hover Effect -->
+        <div
+          class="w-20 h-20 bg-gray-50 rounded-2xl flex items-center justify-center mb-5 transition-transform duration-300 hover:scale-110 hover:bg-emerald-50 group"
+        >
+          <svg
+            class="w-10 h-10 text-gray-400 group-hover:text-emerald-600 transition-colors duration-300"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+            />
+          </svg>
+        </div>
+
+        <!-- Title -->
+        <h3 class="text-xl font-bold text-gray-900 tracking-tight mb-2">No Products Found</h3>
+
+        <!-- Subtitle -->
+        <p class="text-sm text-gray-500 mb-8 leading-relaxed">
+          No Products match your current filters. Try resetting or viewing all available Products.
+        </p>
+
+        <!-- Action Button -->
+        <button
+          routerLink="/shop"
+          class="w-full sm:w-auto px-10 py-4 font-bold bg-[#18A94E] group hover:scale-105 transition-all duration-200 active:scale-95 text-white text-xl rounded-xl shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <span>View All Products</span>
+          <i
+            class="fa-solid fa-arrow-right group-hover:translate-x-3 font-semibold mt-0.5 transition-transform duration-200"
+          ></i>
+        </button>
+      </div>
+    }
+  </div>
+</div>
