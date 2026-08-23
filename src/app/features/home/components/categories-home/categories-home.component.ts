@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { CategoryService } from '../../../../core/services/category.service';
 import { Category } from '../../../../core/models/category.interface';
-import { H2Component } from '../../../../shared/ui/headings/h2/h2.component';
+import { H2Component } from '../../../../shared/ui/components/headings/h2/h2.component';
 import { RouterLink } from '@angular/router';
 
 @Component({

@@ -1,0 +1,235 @@
+<div class="col-span-1 md:col-span-3 space-y-6">
+  <!-- Profile Info -->
+  <section class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="p-2 bg-emerald-50 text-emerald-600 rounded-lg">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path
+            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+          />
+        </svg>
+      </div>
+      <div>
+        <h3 class="font-bold text-gray-800">Profile Information</h3>
+        <p class="text-xs text-gray-500">Update your personal details</p>
+      </div>
+    </div>
+
+    <form [formGroup]="information" (submit)="submitInformation()" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+        <input
+          formControlName="name"
+          type="text"
+          value="Usama"
+          placeholder="ali"
+          class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all"
+        />
+        @let nameControl = information.get('name');
+        @if (nameControl?.invalid && nameControl?.touched) {
+          <div
+            class="flex p-4 mt-2 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+            role="alert"
+          >
+            <span class="sr-only">Danger</span>
+            <div>
+              <ul class="mt-3 list-disc list-outside space-y-1 ps-2.5">
+                @if (nameControl?.hasError('required')) {
+                  <li>Full Name is required</li>
+                } @else if (nameControl?.hasError('minlength')) {
+                  <li>Name must be at least 3 characters</li>
+                }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+        <input
+          formControlName="email"
+          type="email"
+          class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all"
+          placeholder="Enter your email"
+        />
+        @let emailControl = information.get('email');
+        @if (emailControl?.invalid && emailControl?.touched) {
+          <div
+            class="flex mt-2 p-4 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+            role="alert"
+          >
+            <span class="sr-only">Danger</span>
+            <div>
+              <ul class="mt-3 list-disc list-outside space-y-1 ps-2.5">
+                @if (emailControl?.hasError('required')) {
+                  <li>Email is required</li>
+                } @else if (emailControl?.hasError('email')) {
+                  <li>Please enter a valid email</li>
+                }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+        <input
+          formControlName="phone"
+          type="text"
+          class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all"
+          placeholder="01xxxxxxxxx"
+        />
+        @let phoneControl = information.get('phone');
+        @if (phoneControl?.invalid && phoneControl?.touched) {
+          <div
+            class="flex p-4 mt-2 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+            role="alert"
+          >
+            <span class="sr-only">Danger</span>
+            <div>
+              <ul class="mt-3 list-disc list-outside space-y-1 ps-2.5">
+                @if (phoneControl?.hasError('required')) {
+                  <li>Phone is required</li>
+                } @else if (phoneControl?.hasError('pattern')) {
+                  <li>Please enter a valid Egyptian phone number (e.g., 01012345678)</li>
+                }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+      <button
+        type="submit"
+        [disabled]="information.invalid"
+        class="bg-emerald-600 disabled:bg-emerald-400 cursor-pointer disabled:cursor-not-allowed hover:bg-emerald-700 text-white px-6 py-2.5 rounded-xl font-medium transition-colors shadow-lg shadow-emerald-200"
+      >
+        Save Changes
+      </button>
+    </form>
+
+    <div class="mt-8 pt-6 border-t border-gray-100">
+      <h4 class="font-bold text-gray-800 mb-4">Account Information</h4>
+      <div class="flex justify-between text-sm py-2">
+        <span class="text-gray-500">User ID</span> <span class="text-gray-900">#6901</span>
+      </div>
+      <div class="flex justify-between text-sm py-2">
+        <span class="text-gray-500">Role</span>
+        <span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded text-xs font-bold"
+          >User</span
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- Change Password -->
+  <section class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="p-2 bg-amber-50 text-amber-600 rounded-lg">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path
+            d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"
+          />
+        </svg>
+      </div>
+      <div>
+        <h3 class="font-bold text-gray-800">Change Password</h3>
+        <p class="text-xs text-gray-500">Update your account password</p>
+      </div>
+    </div>
+
+    <form [formGroup]="changePassword" (submit)="submitNewPassword()" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
+        <input
+          formControlName="currentPassword"
+          type="password"
+          class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-amber-500"
+          placeholder="Enter your current password"
+        />
+        @let currentPassword = changePassword.get('currentPassword');
+        @if (currentPassword?.invalid && currentPassword?.touched) {
+          <div
+            class="flex mt-2 p-4 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+            role="alert"
+          >
+            <span class="sr-only">Danger</span>
+            <div>
+              <ul class="mt-3 list-disc list-outside space-y-1 ps-2.5">
+                @if (currentPassword?.hasError('required')) {
+                  <li>Password is required</li>
+                } @else if (currentPassword?.hasError('pattern')) {
+                  <li>
+                    Must contain at least 8 chars, 1 uppercase, 1 lowercase, 1 number, and 1 special
+                  </li>
+                }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+        <input
+          formControlName="password"
+          type="password"
+          class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-amber-500"
+          placeholder="Enter your new password"
+        />
+        @let password = changePassword.get('password');
+        @if (password?.invalid && password?.touched) {
+          <div
+            class="flex mt-2 p-4 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+            role="alert"
+          >
+            <span class="sr-only">Danger</span>
+            <div>
+              <ul class="mt-3 list-disc list-outside space-y-1 ps-2.5">
+                @if (password?.hasError('required')) {
+                  <li>Password is required</li>
+                } @else if (password?.hasError('pattern')) {
+                  <li>
+                    Must contain at least 8 chars, 1 uppercase, 1 lowercase, 1 number, and 1 special
+                  </li>
+                }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
+        <input
+          formControlName="rePassword"
+          type="password"
+          class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-amber-500"
+          placeholder="Confirm your new password"
+        />
+        @let rePassword = changePassword.get('rePassword');
+        @if (rePassword?.invalid && rePassword?.touched) {
+          <div
+            class="flex mt-2 p-4 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+            role="alert"
+          >
+            <span class="sr-only">Danger</span>
+            <div>
+              <ul class="mt-3 list-disc list-outside space-y-1 ps-2.5">
+                @if (rePassword?.hasError('required')) {
+                  <li>Please confirm your password</li>
+                } @else if (rePassword?.hasError('mismatch')) {
+                  <li>Passwords do not match.</li>
+                }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+      <button
+        type="submit"
+        [disabled]="changePassword.invalid"
+        class="disabled:bg-orange-300 cursor-pointer disabled:cursor-not-allowed bg-orange-500 hover:bg-orange-600 text-white px-6 py-2.5 rounded-xl font-medium transition-colors shadow-lg shadow-orange-200"
+      >
+        Change Password
+      </button>
+    </form>
+  </section>
+</div>

@@ -1,0 +1,243 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+  <!-- Breadcrumb -->
+  <nav class="text-sm text-gray-500 font-medium mb-6">
+    <a href="#" class="hover:text-emerald-600 transition-colors">Home</a>
+    <span class="mx-2">/</span>
+    <span class="text-gray-800 font-semibold">Search Results</span>
+  </nav>
+
+  <!-- Search Bar Top -->
+  <div class="relative max-w-xl mb-6">
+    <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-500">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </span>
+    <input
+      #searchInput
+      (input)="searchChange(searchInput.value)"
+      (input)="searchValue.set(searchInput.value)"
+      type="text"
+      [value]="searchValue()"
+      class="w-full pl-11 pr-4 py-3 bg-white border border-gray-300 rounded-xl text-sm font-medium text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all shadow-xs"
+    />
+  </div>
+
+  @if (searchValue() !== '') {
+    <!-- Search Title & Count -->
+    <div class="mb-8">
+      <h1 class="text-2xl font-bold text-gray-900 tracking-tight">
+        Search Results for "{{ searchValue() }}"
+      </h1>
+      <p class="text-sm font-medium text-gray-600 mt-1">
+        We found {{ allProducts().length }} products for you
+      </p>
+    </div>
+  }
+
+  <!-- Main Layout: Sidebar & Content Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+    <!-- Sidebar Filters -->
+    <aside class="space-y-6 lg:col-span-1 bg-transparent sticky top-24">
+      <!-- Categories -->
+      <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-xs">
+        <h3 class="font-bold text-gray-900 mb-4 text-base">Categories</h3>
+        <div class="space-y-3 max-h-56 overflow-y-auto pr-2 custom-scrollbar text-sm">
+          @for (category of allCategories(); track category._id) {
+            <label
+              class="flex items-center gap-3 cursor-pointer hover:text-emerald-600 transition-colors"
+            >
+              <input
+                [checked]="selectedCategorys().includes(category._id)"
+                (change)="onCategoryChange(category._id, $event.target.checked)"
+                type="checkbox"
+                class="w-4 h-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+              />
+              <span class="text-gray-700 font-medium">{{ category.name }}</span>
+            </label>
+          }
+        </div>
+      </div>
+
+      <!-- Price Range -->
+      <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-xs">
+        <h3 class="font-bold text-gray-900 mb-4 text-base">Price Range</h3>
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-1/2">
+            <span class="text-xs font-semibold text-gray-500 block mb-1">Min (EGP)</span>
+            <input
+              #GTEInput
+              (input)="setGTE(GTEInput.valueAsNumber)"
+              type="number"
+              [value]="priceGTE()"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-800 focus:ring-2 focus:ring-emerald-500 outline-none"
+            />
+          </div>
+          <div class="w-1/2">
+            <span class="text-xs font-semibold text-gray-500 block mb-1">Max (EGP)</span>
+            <input
+              #LTEInput
+              (input)="setLTE(LTEInput.valueAsNumber)"
+              type="number"
+              [value]="priceLTE()"
+              class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-lg text-sm font-medium text-gray-500"
+            />
+          </div>
+        </div>
+        <!-- Quick Price Pills with Hover Effects -->
+        <div class="flex flex-wrap gap-2">
+          <button
+            [class.bg-emerald-700]="priceLTE() === 500"
+            [class.text-gray-100]="priceLTE() === 500"
+            (click)="setLTE(500)"
+            class="px-3.5 py-1.5 bg-gray-100 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-300 border border-transparent text-sm font-medium rounded-full transition-all text-gray-700"
+          >
+            Under 500
+          </button>
+          <button
+            [class.bg-emerald-700]="priceLTE() === 1000"
+            [class.text-gray-100]="priceLTE() === 1000"
+            (click)="setLTE(1000)"
+            class="px-3.5 py-1.5 bg-gray-100 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-300 border border-transparent text-sm font-medium rounded-full transition-all text-gray-700"
+          >
+            Under 1K
+          </button>
+          <button
+            [class.bg-emerald-700]="priceLTE() === 5000"
+            [class.text-gray-100]="priceLTE() === 5000"
+            (click)="setLTE(5000)"
+            class="px-3.5 py-1.5 bg-gray-100 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-300 border border-transparent text-sm font-medium rounded-full transition-all text-gray-700"
+          >
+            Under 5K
+          </button>
+          <button
+            [class.bg-emerald-700]="priceLTE() === 10000"
+            [class.text-gray-100]="priceLTE() === 10000"
+            (click)="setLTE(10000)"
+            class="px-3.5 py-1.5 bg-gray-100 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-300 border border-transparent text-sm font-medium rounded-full transition-all text-gray-700"
+          >
+            Under 10K
+          </button>
+        </div>
+      </div>
+
+      <!-- Brands Heading Placeholder -->
+      <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-xs">
+        <h3 class="font-bold text-gray-900 text-base mb-4">Brands</h3>
+        <div class="space-y-3 max-h-56 overflow-y-auto pr-2 custom-scrollbar text-sm">
+          @for (brand of allBrands(); track brand._id) {
+            <label
+              class="flex items-center gap-3 cursor-pointer hover:text-emerald-600 transition-colors"
+            >
+              <input
+                (change)="onBrandChange(brand._id, $event.target.checked)"
+                [checked]="selectedBrands().includes(brand._id)"
+                type="checkbox"
+                class="w-4 h-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+              />
+              <span class="text-gray-700 font-medium">{{ brand.name }}</span>
+            </label>
+          }
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="lg:col-span-3">
+      <!-- Filter & Sorting Bar -->
+      <div
+        class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-4 rounded-xl border border-gray-200 shadow-xs mb-6"
+      >
+        <!-- View Toggles & Active Filters -->
+        <div class="flex flex-wrap items-center gap-4">
+          <!-- Grid / List Icons -->
+          <div class="flex items-center gap-1 bg-gray-100 rounded-md">
+            <button
+              (click)="changeDisplay()"
+              [class.bg-emerald-600]="isGridView()"
+              [class.text-white]="isGridView()"
+              [class.text-gray-600]="!isGridView()"
+              class="w-9 h-9 cursor-pointer rounded-md flex items-center justify-center text-sm shadow-xs transition-all"
+            >
+              <i class="fa-solid fa-table-cells"></i>
+            </button>
+            <button
+              (click)="changeDisplay()"
+              [class.bg-emerald-600]="!isGridView()"
+              [class.text-white]="!isGridView()"
+              [class.text-gray-600]="isGridView()"
+              class="w-9 h-9 cursor-pointer rounded-md flex items-center justify-center text-sm transition-all"
+            >
+              <i class="fa-solid fa-list"></i>
+            </button>
+          </div>
+
+          <!-- Active Filters Tag
+          <div class="flex items-center gap-2 text-sm font-medium">
+            <span class="text-gray-500 font-semibold">Active:</span>
+            @for (category of selectedCategorys(); track $index) {
+              <span
+              class="bg-emerald-50 text-emerald-700 border border-emerald-300 px-3 py-1 rounded-full flex items-center gap-2 font-medium"
+            >
+              "woman"
+              <i class="fa-solid fa-xmark cursor-pointer hover:text-red-600 transition-colors"></i>
+            </span>
+            }
+            <a href="#" class="text-gray-600 hover:text-emerald-600 underline ml-1 font-semibold"
+              >Clear all</a
+            >
+          </div> -->
+        </div>
+
+        <!-- Sort Dropdown -->
+        <div class="flex items-center gap-2 text-sm w-full sm:w-auto justify-end font-medium">
+          <span class="text-gray-500 font-semibold">Sort by:</span>
+          <select
+            #sortSelect
+            (change)="setSort(sortSelect.value)"
+            class="border border-gray-300 rounded-lg px-3 py-2 text-sm font-medium bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer"
+          >
+            <option>Relevance</option>
+            <option [selected]="sort() === 'price'">Price: Low to High</option>
+            <option [selected]="sort() === '-price'">Price: High to Low</option>
+            <option [selected]="sort() === '-ratingsAverage'">Rating: High to Low</option>
+            <option [selected]="sort() === 'title'">Name: A to Z</option>
+            <option [selected]="sort() === '-title'">Name: Z to A</option>
+          </select>
+        </div>
+      </div>
+
+      @if (allProducts().length > 0) {
+        <!-- all products grid -->
+        <div
+          class="mx-auto sm:gap-2 xl:gap-4 gap-1 md:gap-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-7xl mt-5"
+        >
+          @for (product of allProducts(); track product._id) {
+            <div [class.col-span-12]="!isGridView()">
+              <app-product [product]="product" />
+            </div>
+          }
+        </div>
+      } @else {
+        <!-- No Products Found State Card -->
+        <div
+          class="bg-white rounded-2xl border border-gray-200 p-12 text-center shadow-xs flex flex-col items-center justify-center min-h-[400px]"
+        >
+          <div
+            class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 text-xl mb-4 border border-gray-200"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <h2 class="text-xl font-bold text-gray-900 mb-2">No Products Found</h2>
+          <p class="text-base text-gray-600 mb-6 max-w-sm font-medium">
+            Try adjusting your search or filters to find what you're looking for.
+          </p>
+          <button
+            (click)="clearFilters()"
+            class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-7 py-3 rounded-xl shadow-sm hover:shadow-md transition-all"
+          >
+            Clear Filters
+          </button>
+        </div>
+      }
+    </main>
+  </div>
+</div>

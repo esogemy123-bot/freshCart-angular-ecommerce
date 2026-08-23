@@ -9,7 +9,7 @@ import { Brand } from '../../core/models/brand.interface';
 
 @Component({
   selector: 'app-brand-details',
-  imports: [RouterLink, RouterLinkActive, DiscountPercentagePipe],
+  imports: [RouterLink, DiscountPercentagePipe],
   templateUrl: './brand-details.component.html',
   styleUrl: './brand-details.component.css',
 })

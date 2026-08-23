@@ -1,8 +1,10 @@
+import { LoginService } from './../../core/auth/services/login.service';
 import { CartService } from './../../core/services/cart.service';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { Cart } from './models/cart.interface';
 import { RouterLink } from '@angular/router';
 import { TotalPricePipe } from '../../shared/pipes/total-price-pipe';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
@@ -12,15 +14,25 @@ import { TotalPricePipe } from '../../shared/pipes/total-price-pipe';
 })
 export class CartComponent implements OnInit {
   private readonly cartService = inject(CartService);
+  private readonly loginService = inject(LoginService);
+  private readonly pLATFORM_ID = inject(PLATFORM_ID);
   cart = signal<Cart>({} as Cart);
+  logged = signal<boolean>(false);
   ngOnInit(): void {
-    this.getCartProducts();
+    if (isPlatformBrowser(this.pLATFORM_ID)) {
+      this.getCartProducts();
+      this.logged.set(this.loginService.isLogged());
+    }
   }
   getCartProducts() {
     this.cartService.getCart().subscribe({
       next: (res) => {
         console.log(res);
         this.cart.set(res.data);
+        this.cartService.userId.set(res.data.cartOwner);
+        localStorage.setItem('userId', res.data.cartOwner);
+        console.log(this.cartService.userId());
+        console.log(localStorage.getItem('userId'));
       },
       error: (err) => {
         console.log(err.message);
@@ -33,6 +45,7 @@ export class CartComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.cart.set(res.data);
+        this.cartService.cartCount.set(res.numOfCartItems);
       },
       error: (err) => {
         console.log(err.message);
@@ -44,6 +57,7 @@ export class CartComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.cart.set(res.data);
+        this.cartService.cartCount.set(0);
       },
       error: (err) => {
         console.log(err.message);

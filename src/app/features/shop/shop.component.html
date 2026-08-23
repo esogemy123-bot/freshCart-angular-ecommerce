@@ -1,1 +1,14 @@
-<app-products-home></app-products-home>
+<section class="py-10">
+  <div class="container px-2">
+    <div class="mx-auto max-w-7xl">
+      <app-h2 firstWord="Featured" highlightedWord="Products" />
+      <div
+        class="mx-auto sm:gap-2 xl:gap-4 gap-1 md:gap-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-7xl mt-5"
+      >
+        @for (product of allProducts(); track product._id) {
+          <app-product [product]="product" />
+        }
+      </div>
+    </div>
+  </div>
+</section>

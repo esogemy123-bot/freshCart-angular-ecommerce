@@ -5,6 +5,7 @@ import { LoginService } from '../../core/auth/services/login.service';
 import { isPlatformBrowser } from '@angular/common';
 import { CategoryService } from '../../core/services/category.service';
 import { Category } from '../../core/models/category.interface';
+import { CartService } from '../../core/services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,14 +19,20 @@ export class NavbarComponent implements OnInit {
   private readonly loginService = inject(LoginService);
   private readonly categoryService = inject(CategoryService);
   private readonly pLATFORM_ID = inject(PLATFORM_ID);
+  private readonly cartService = inject(CartService);
   private readonly router = inject(Router);
+  user = {} as any;
   logged = computed(() => this.loginService.isLogged());
-
+  cartCount = computed(() => this.cartService.cartCount());
+  isDropdownOpen = signal<boolean>(false);
   ngOnInit(): void {
     if (isPlatformBrowser(this.pLATFORM_ID)) {
       if (localStorage.getItem('freshToken')) {
         this.loginService.isLogged.set(true);
         console.log(this.logged());
+        this.setCartCount();
+        this.user = JSON.parse(localStorage.getItem('freshUser')!);
+        console.log(this.user);
       }
     }
     this.getCategories();
@@ -51,5 +58,15 @@ export class NavbarComponent implements OnInit {
         this.categories.set(res.data);
       },
     });
+  }
+  setCartCount() {
+    this.cartService.getCart().subscribe({
+      next: (res) => {
+        this.cartService.cartCount.set(res.numOfCartItems);
+      },
+    });
+  }
+  toggleProfileOptions() {
+    this.isDropdownOpen.set(!this.isDropdownOpen());
   }
 }

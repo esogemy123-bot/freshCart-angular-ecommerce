@@ -1,5 +1,4 @@
-import { SpeciSubcategoryComponent } from './features/speci-subcategory/speci-subcategory.component';
-import { SubcategoriesComponent } from './features/subcategories/subcategories.component';
+import { AdressComponent } from './features/adress/adress.component';
 import { Routes } from '@angular/router';
 import { authGuard } from './core/auth/guard/auth-guard';
 
@@ -7,6 +6,12 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./features/home/home.component').then((m) => m.HomeComponent),
+    title: 'Home Page',
+  },
+  {
+    path: 'search',
+    loadComponent: () =>
+      import('./features/search/search.component').then((m) => m.SearchComponent),
     title: 'Home Page',
   },
   {
@@ -63,7 +68,7 @@ export const routes: Routes = [
     title: 'Details Page',
   },
   {
-    path: 'checkout',
+    path: 'checkout/:id',
     loadComponent: () =>
       import('./features/checkout/checkout.component').then((m) => m.CheckoutComponent),
     title: 'Checkout Page',
@@ -78,7 +83,7 @@ export const routes: Routes = [
     title: 'brand Page',
   },
   {
-    path: 'orders',
+    path: 'allorders',
     loadComponent: () =>
       import('./features/orders/orders.component').then((m) => m.OrdersComponent),
     title: 'Orders Page',
@@ -100,6 +105,25 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/forgot/forgot.component').then((m) => m.ForgotComponent),
     title: 'Forgot Password Page',
+  },
+  {
+    path: 'profile',
+    loadComponent: () =>
+      import('./features/profile/profile.component').then((m) => m.ProfileComponent),
+    title: 'Profile Page',
+    children: [
+      { path: '', redirectTo: 'addresses', pathMatch: 'full' }, // التحويل التلقائي هنا
+      {
+        path: 'settings',
+        loadComponent: () =>
+          import('./features/settings/settings.component').then((m) => m.SettingsComponent),
+      },
+      {
+        path: 'addresses',
+        loadComponent: () =>
+          import('./features/adress/adress.component').then((m) => m.AdressComponent),
+      },
+    ],
   },
   {
     path: '**',
