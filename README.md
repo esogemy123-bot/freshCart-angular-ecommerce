@@ -36,5 +36,5 @@ Make sure you have Node.js and the Angular CLI installed on your system.
 
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/esogemy123-bot/freshCart-angular-ecommerce.git]
+   git clone https://github.com/esogemy123-bot/freshCart-angular-ecommerce.git
    ```
