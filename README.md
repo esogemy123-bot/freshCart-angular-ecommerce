@@ -1,60 +1,40 @@
-# ECommerce
+# FreshCart 🛒
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.2.
+FreshCart is a modern, feature-rich e-commerce web application built with **Angular** and **Tailwind CSS**. It delivers a seamless, high-performance online shopping experience with advanced product filtering, real-time search, dynamic cart and wishlist management, secure authentication, and integrated online payments.
 
-## Development server
+---
 
-To start a local development server, run:
+## ✨ Key Features
 
-```bash
-ng serve
-```
+- **Advanced Product Filtering & Sorting:** Effortlessly filter products by categories, brands, and custom price ranges. Sort items dynamically by price, ratings, or alphabetical order.
+- **Real-time Search:** Instant product search functionality with live results and query handling.
+- **Flexible Layout Views:** Seamlessly toggle between Grid and List view layouts to optimize the browsing experience.
+- **Shopping Cart & Wishlist:** Fully interactive cart and wishlist system featuring dynamic quantity adjustments, item removal, and smooth item transfers.
+- **Robust Authentication:** Secure user registration, login workflows, and password reset mechanisms equipped with custom form validations.
+- **Stripe Payment Integration:** Secure online checkout simulation integrated via Stripe sandbox mode.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🛠️ Tech Stack
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Frontend:** Angular, TypeScript, Tailwind CSS
+- **State & Data Management:** Angular Services
+- **Payment Processing:** Stripe API
+- **Development Tools:** Git, Angular CLI, VS Code
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🚀 Getting Started
 
-```bash
-ng generate --help
-```
+To get a local copy up and running, follow these simple steps:
 
-## Building
+### Prerequisites
 
-To build the project run:
+Make sure you have Node.js and the Angular CLI installed on your system.
 
-```bash
-ng build
-```
+### Installation
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-"# freshcart-ecommerce" 
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/your-username/fresh-cart.git](https://github.com/your-username/fresh-cart.git)
+   ```

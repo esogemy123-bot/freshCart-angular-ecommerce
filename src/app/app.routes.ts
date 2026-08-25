@@ -112,16 +112,16 @@ export const routes: Routes = [
       import('./features/profile/profile.component').then((m) => m.ProfileComponent),
     title: 'Profile Page',
     children: [
-      { path: '', redirectTo: 'addresses', pathMatch: 'full' }, // التحويل التلقائي هنا
-      {
-        path: 'settings',
-        loadComponent: () =>
-          import('./features/settings/settings.component').then((m) => m.SettingsComponent),
-      },
+      { path: '', redirectTo: 'addresses', pathMatch: 'full' },
       {
         path: 'addresses',
         loadComponent: () =>
           import('./features/adress/adress.component').then((m) => m.AdressComponent),
+      },
+      {
+        path: 'settings',
+        loadComponent: () =>
+          import('./features/settings/settings.component').then((m) => m.SettingsComponent),
       },
     ],
   },

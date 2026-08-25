@@ -57,14 +57,4 @@ export class ProductComponent {
       });
     }
   }
-  // toggleWishlist(productId: string) {
-  //   this.allProducts.update((currentProducts) =>
-  //     currentProducts.map((product: any) => {
-  //       if (product._id === productId) {
-  //         product.isWishList = !product.isWishList;
-  //       }
-  //       return product;
-  //     }),
-  //   );
-  // }
 }

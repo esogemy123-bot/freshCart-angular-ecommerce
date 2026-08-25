@@ -69,6 +69,7 @@ export class WishlistComponent implements OnInit {
             progressBar: true,
             closeButton: true,
           });
+          this.cartService.cartCount.set(res.numOfCartItems);
         },
         error: (err) => {
           this.toastrService.warning(err.message, 'FreshCart', {

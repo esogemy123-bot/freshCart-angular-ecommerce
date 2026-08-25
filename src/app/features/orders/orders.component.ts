@@ -2,13 +2,11 @@ import { CartService } from './../../core/services/cart.service';
 import { Component, computed, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { OrdersService } from '../../core/services/orders.service';
 import { CurrencyPipe, DatePipe, isPlatformBrowser } from '@angular/common';
-import { platform } from 'os';
-import { sign } from 'crypto';
 import { Order } from '../../core/models/order.interface';
 import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-orders',
-  imports: [RouterLink, DatePipe, CurrencyPipe],
+  imports: [RouterLink, DatePipe],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css',
 })
