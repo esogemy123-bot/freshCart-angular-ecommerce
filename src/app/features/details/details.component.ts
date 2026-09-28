@@ -21,6 +21,7 @@ export class DetailsComponent implements OnInit {
   private readonly cartService = inject(CartService);
   private readonly wishlistService = inject(WishlistService);
   private readonly toastrService = inject(ToastrService);
+
   product = signal<Product>({} as Product);
   activeImage = signal<string>('');
   ngOnInit(): void {
@@ -66,8 +67,7 @@ export class DetailsComponent implements OnInit {
           this.toastrService.success(res.message, 'FreshCart', {
             progressBar: true,
             closeButton: true,
-          });
-          // this.toggleWishlist(productId);
+          }); 
         },
         error: (err) => {
           this.toastrService.warning(err.message, 'FreshCart', {

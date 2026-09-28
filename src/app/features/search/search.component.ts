@@ -7,7 +7,7 @@ import { CategoryService } from '../../core/services/category.service';
 import { Category } from '../../core/models/category.interface';
 import { Product } from '../../core/models/product.interface';
 import { ProductComponent } from '../../shared/ui/components/product/product.component';
-
+import { debounceTime, distinctUntilChanged, first, fromEvent, interval, map, of, Subject } from 'rxjs';
 @Component({
   selector: 'app-search',
   imports: [ProductComponent],
@@ -17,15 +17,7 @@ import { ProductComponent } from '../../shared/ui/components/product/product.com
 export class SearchComponent implements OnInit {
   private readonly productsService = inject(ProductsService);
   private readonly brandsService = inject(BrandsService);
-  private readonly categoryService = inject(CategoryService);
-
-  ngOnInit(): void {
-    this.getBrands();
-    this.getCategories();
-    this.loadProducts();
-  }
-
-  // تخيل دي الأري اللي شايلة البراندات اللي اليوزر اختارها من الـ HTML
+  private readonly categoryService = inject(CategoryService);  
   allProducts = signal<Product[]>([]);
   allBrands = signal<Brand[]>([]);
   allCategories = signal<Category[]>([]);
@@ -37,6 +29,26 @@ export class SearchComponent implements OnInit {
   sort = signal<string>('price');
   searchValue = signal<string>('');
   isGridView = signal<boolean>(true);
+
+  searchSubject = new Subject();
+
+  ngOnInit(): void {
+    this.getBrands();
+    this.getCategories();
+    this.loadProducts(); 
+    this.searchSubject.pipe(
+      debounceTime(1000),
+      distinctUntilChanged()
+    )
+    .subscribe((value)=>{
+          this.selectedParams.update((params) => ({
+      ...params,
+      keyword: value as string,
+    }));
+    this.loadProducts();
+    })
+  }
+
 
   changeDisplay() {
     this.isGridView.set(!this.isGridView());
@@ -68,8 +80,7 @@ export class SearchComponent implements OnInit {
     });
     this.loadProducts();
   }
-
-  // نفس الكلام للـ Categories
+ 
   onCategoryChange(categoryId: string, isChecked: boolean) {
     this.selectedCategorys.update((categories) => {
       const updatedCategories = isChecked
@@ -101,11 +112,7 @@ export class SearchComponent implements OnInit {
   }
 
   searchChange(value: string) {
-    this.selectedParams.update((params) => ({
-      ...params,
-      keyword: value,
-    }));
-    this.loadProducts();
+    this.searchSubject.next(value);
   }
 
   setGTE(value: number) {
@@ -146,21 +153,4 @@ export class SearchComponent implements OnInit {
     this.loadProducts();
   }
 
-  // setBrandsValue(brandId: string) {
-  //   if (this.selectedBrands().length === 0) {
-  //     this.selectedParams().brand = brandId;
-  //   } else {
-  //     this.selectedBrands().push(brandId);
-  //     this.selectedParams().brand = this.selectedBrands();
-  //   }
-  // }
-  // setCategoriesValue(categoryId: string) {
-  //   if (this.selectedCategorys().length === 0) {
-  //     this.selectedParams().categoryId = categoryId;
-  //   } else {
-  //     this.selectedCategorys().push(categoryId);
-  //     this.selectedParams().categoryId = this.selectedCategorys();
-  //   }
-  // }
-  // دالة التعامل مع البراندات (إضافة لو معلم، أو حذف لو شايل العلامة)
 }

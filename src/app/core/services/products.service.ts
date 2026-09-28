@@ -32,7 +32,6 @@ export class ProductsService {
       queryParams.push(`price[lte]=${params.priceLte}`);
     }
 
-    // هندلة الـ Brand (لو جاية أري أو قيمة واحدة)
     if (params.brand) {
       if (Array.isArray(params.brand)) {
         params.brand.forEach((b) => queryParams.push(`brand=${b}`));
@@ -41,7 +40,6 @@ export class ProductsService {
       }
     }
 
-    // هندلة الـ Category (لو جاية أري أو قيمة واحدة)
     if (params.categoryId) {
       if (Array.isArray(params.categoryId)) {
         params.categoryId.forEach((cat) => queryParams.push(`category[in]=${cat}`));
