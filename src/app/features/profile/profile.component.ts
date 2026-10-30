@@ -16,7 +16,9 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './profile.component.css',
 })
 export class ProfileComponent {
+  profSer= inject(ProfileService)
   content = signal<string>('addresses');
+  addressesCount = this.profSer.addressesCount()
   changeContent(content: string) {
     this.content.set(content);
   }

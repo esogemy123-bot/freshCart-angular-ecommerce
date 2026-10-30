@@ -7,7 +7,7 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   const ngxSpinnerService = inject(NgxSpinnerService);
 
   // req show
-  ngxSpinnerService.show();
+  ngxSpinnerService.show(); 
 
   // res hide
   return next(req).pipe(
@@ -15,4 +15,4 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
       ngxSpinnerService.hide();
     }),
   );
-};
+}; 

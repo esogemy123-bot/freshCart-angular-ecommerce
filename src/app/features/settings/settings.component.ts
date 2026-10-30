@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID, signal, WritableSignal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -6,9 +6,10 @@ import {
   AbstractControl,
   ɵInternalFormsSharedModule,
   ReactiveFormsModule,
-} from '@angular/forms';
-import { Router } from 'express';
+} from '@angular/forms'; 
 import { ProfileService } from '../../core/services/profile.service';
+import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common'; 
 
 @Component({
   selector: 'app-settings',
@@ -16,11 +17,17 @@ import { ProfileService } from '../../core/services/profile.service';
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css',
 })
-export class SettingsComponent {
+export class SettingsComponent implements OnInit {
   private readonly profileService = inject(ProfileService);
   private readonly formBuilder = inject(FormBuilder);
   private readonly router = inject(Router);
-
+  private readonly pLATFORM_ID = inject(PLATFORM_ID);
+  userId = signal<string>('');
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.pLATFORM_ID)) {  
+      this.userId.set(localStorage.getItem('userId')!)
+    }
+  }
   information: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
@@ -52,7 +59,7 @@ export class SettingsComponent {
       this.profileService.updateLoggedUserData(this.information.value).subscribe({
         next: (res) => {
           console.log(res);
-          this.information.reset;
+          this.information.reset();
         },
       });
     } else {
